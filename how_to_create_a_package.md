@@ -48,3 +48,5 @@
     10.2. Move `model_name.relations` from `business_data` to `packages/package_name/business_data/relations` using the comman
 
     `cp /path/to/business_data/data_name/model_name.relations /path/to/packages/package_name/business_data/relations`
+
+TODO:: Just copied relations over on the Jersey arches installation 
