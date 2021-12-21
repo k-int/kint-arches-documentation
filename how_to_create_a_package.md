@@ -92,3 +92,5 @@
     scp -r /path/to/collections remote_user@ip /path/to/packges/package_name/reference_data/collections
     ```
 
+13. In `packages` create a new folder called `ontlogies` using `mkdir ontolgoies` and within that folder create another directory called `cidoc_crm` and finally move `cidoc` files in there donwloaded from [https://arches.readthedocs.io/en/stable/ontologies-in-arches/?highlight=cidoc#loading-an-ontology](https://arches.readthedocs.io/en/stable/ontologies-in-arches/?highlight=cidoc#loading-an-ontology)
+to `ontologies/cidoc_crm/`
