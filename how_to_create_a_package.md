@@ -43,10 +43,44 @@
 
     10.1. Copy `model_name.csv` from `business_data` to `packages/package_name/business_data` using the command 
 
-    `cp /path/to/business_data/data_name/model_name.csv /path/to/packages/package_name/business_data`
+    ```
+    cp /path/to/business_data/data_name/model_name.csv /path/to/packages/package_name/business_data
+    ```
 
-    10.2. Move `model_name.relations` from `business_data` to `packages/package_name/business_data/relations` using the comman
+    10.2. Copy `model_name.relations` from `business_data` to `packages/package_name/business_data/relations` using the command
 
-    `cp /path/to/business_data/data_name/model_name.relations /path/to/packages/package_name/business_data/relations`
+    ```
+    cp /path/to/business_data/data_name/model_name.relations /path/to/packages/package_name/business_data/relations
+    ```
 
-TODO:: Just copied relations over on the Jersey arches installation 
+    10.3. Copy `mapping_file.mapping` to `packages/package_name/business_data` 
+    using the command 
+
+    ```
+    cp /path/to/mapping_files/model_name/file.mapping /path/to/packages/package_name/business_data
+    ```
+
+    10.4 Rename `business_data.csv` file in `packages/package_name/business_data` to the same name as your `mapping_file.mapping` to end up with `mapping_file_name.csv` using the command
+
+    ```
+    mv business_data.csv mapping_file_name.csv 
+    ``` 
+
+### Once business data is moves, it's time to download reference data
+
+11. Go to Reference Data Manager in Arches UI click  `Tools` and export each thesauri one by one
+
+    11.2. Once downloaded move the thesauri to the remote machines `packages/package_name/reference_data/concepts` using the command
+
+    ```
+    scp -r /path/to/thesauri remote_user@ip /path/to/packages/package_name/reference_data/concepts
+    ```
+
+12. Go to Refernece Data Manger in Arches UI click `Tools` and export all collections
+
+    12.1. Once downloaded move the collections to the remote machines `packages/package_name/reference_data/collections` using the command
+
+    ```
+    scp -r /path/to/collections remote_user@ip /path/to/packges/package_name/reference_data/collections
+    ```
+
