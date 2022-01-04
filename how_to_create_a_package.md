@@ -73,6 +73,12 @@
     ```
     mv business_data.csv mapping_file_name.csv 
     ``` 
+    
+    10.6 Copy all files from `uploadedfiles` directory to `packages/business_data/files` using the command
+    
+    ```
+    cp /path/to/uploadedfiles /path/to/packages/package_name/business_data/files
+    ```
 
 ### Once business data is moved, it's time to download reference data
 
