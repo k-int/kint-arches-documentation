@@ -22,7 +22,7 @@
   ```
   enter `archesadmin` password
   
-  5. Clone install script repo using the following:
+  5. Clone `install_and_apache.sh` repo using the following:
   ```
   git clone https://github.com/reubenosborne1/arches-scripts.git
   ```
