@@ -31,6 +31,7 @@
     6.1 Change `project_name` at the top of the `install_and_apache.sh` file to `projectName_project` example `kyoto_project`
     by using `nano`:
     ```
+    nano arches-scrips/install_and_apache.sh
     project_name="projectName_project"
     ```
     6.2 Change my host to broadcast IP of the server to match ssh IP using while in `nano`:
