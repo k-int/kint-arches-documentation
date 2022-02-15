@@ -52,7 +52,7 @@ Go to /admin
 Match the name with the layer name
 
 In the source add this:
-`{"type": "raster", "tiles": ["<url>/geoserver/cite/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&width=256&height=256&layers=<workspace:layer_name>&transparent=true"], "tileSize": 256}`
+`{"type": "raster", "tiles": ["<url>/geoserver/<workspace name>/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&width=256&height=256&layers=<workspace:layer_name>&transparent=true"], "tileSize": 256}`
 
 But change the `<url>` and `<workspace:map_layer>` to match your implementation and layer you are adding.
 
