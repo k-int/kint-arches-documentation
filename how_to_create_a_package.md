@@ -39,7 +39,7 @@
 
 9. Then run the following command to create a package
 
-    `python manage.py packages -o create_package -d '/path/to/packages/'`
+    `python manage.py packages -o create_package -d '/path/to/packages/package_name'`
 
 10. Once the package is created its time to move the files from the `business_data` folder you've create to the one created in the package :
 
