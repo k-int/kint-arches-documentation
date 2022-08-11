@@ -22,7 +22,7 @@ git checkout 6.1.0
 cd
 ```
 
-4.  create virtual python environment 
+4.  Create virtual python environment 
 ```
 sudo apt-get update
 sudo apt install python3.8-venv
@@ -36,7 +36,7 @@ python3 -m venv env
 source env/bin/activate
 ```
 
-6. install software dependencies 
+6. Install software dependencies 
 ```
 sudo apt-get install gcc
 pip install wheel
@@ -57,7 +57,7 @@ cd
 python -m pip install -e arches/
 ```
 
-8. create a project
+8. Create a project
 ```cd
 cd
 arches-project create project_name
@@ -66,7 +66,7 @@ so that `/home/archesadmin/project_name`
 
 ## Load package
 
-1. Clon package
+1. Clone package
 ```
 git clone 'package_name' 
 ```
