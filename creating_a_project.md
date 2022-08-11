@@ -190,7 +190,7 @@ finally run
 python manage.py collectstatic
 ```
 
-4. Grant paache write settings =
+4. Grant apache write settings =
 ```
 cd
 ```
