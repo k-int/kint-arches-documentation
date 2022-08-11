@@ -41,8 +41,8 @@ source env/bin/activate
 sudo apt-get install gcc
 pip install wheel
 cd arches/
-pip install -e .
 yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
+pip install -e .
 ```
 
 7. Check postgres and es
