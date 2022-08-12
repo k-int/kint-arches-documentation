@@ -40,31 +40,32 @@ source env/bin/activate
 ```
 sudo apt-get install gcc
 pip install wheel
-cd arches/
 yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
+```
+
+7. Install Arches
+```
 pip install -e .
 ```
 
-7. Check postgres and es
+8. Check postgres and es
 ```
 psql -U postgres
 \q
 curl localhost:9200
 ```
-8. Install arches
-```
-cd
-python -m pip install -e arches/
-```
 
-8. Create a project
-```cd
+9. Create a project
+```
 cd
 arches-project create project_name
 ```
 so that `/home/archesadmin/project_name`
 
 ## Load package
+
+Arches packages set up a database.
+If not loading a package, type the following to setup a database. `python manage.py setup_db`
 
 1. Clone package
 ```
