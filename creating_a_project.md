@@ -45,6 +45,7 @@ yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
 
 7. Install Arches
 ```
+cd arches
 pip install -e .
 ```
 
