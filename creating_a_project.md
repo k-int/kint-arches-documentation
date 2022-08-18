@@ -25,7 +25,7 @@ cd
 4.  Create virtual python environment 
 ```
 sudo apt-get update
-sudo apt install python3.8-venv
+sudo apt install python3.x-venv     [match version with x]
 sudo apt-get install python3-dev
 python3 -m venv env
 ```
@@ -40,7 +40,7 @@ source env/bin/activate
 ```
 sudo apt-get install gcc
 pip install wheel
-yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
+yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh     [if clean install do not pipe yes]
 yarn install
 ```
 
@@ -53,7 +53,7 @@ pip install -e .
 8. Check postgres and es
 ```
 psql -U postgres
-\q
+\q 
 curl localhost:9200
 ```
 
@@ -193,7 +193,7 @@ finally run
 python manage.py collectstatic
 ```
 
-4. Grant apache write settings =
+5. Grant apache write settings =
 ```
 cd
 ```
