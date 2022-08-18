@@ -198,18 +198,18 @@ python manage.py collectstatic
 cd
 ```
 ```
-sudo chmod 664 /home/ubuntu/Projects/demo_project/demo_project/arches.log
-sudo chgrp www-data /home/ubuntu/Projects/demo_project/demo_project/arches.log
+sudo chmod -R 664 /home/ubuntu/Projects/demo_project/demo_project/arches.log
+sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project/arches.log
 ```
 ```
-sudo chmod 775 /home/ubuntu/Projects/demo_project/demo_project/uploadedfiles
-sudo chgrp www-data /home/ubuntu/Projects/demo_project/demo_project/uploadedfiles
+sudo chmod -R 775 /home/ubuntu/Projects/demo_project/demo_project/uploadedfiles
+sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project/uploadedfiles
 ```
 ```
-sudo chmod 775 /home/ubuntu/Projects/demo_project/demo_project
-sudo chgrp www-data /home/ubuntu/Projects/demo_project/demo_project
+sudo chmod -R 775 /home/ubuntu/Projects/demo_project/demo_project
+sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project
 ```
 ```
-sudo chmod 775 /home/ubuntu/Projects/demo_project/demo_project/static
-sudo chgrp www-data /home/ubuntu/Projects/demo_project/demo_project/static
+sudo chmod -R 775 /home/ubuntu/Projects/demo_project/demo_project/static
+sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project/static
 ```
