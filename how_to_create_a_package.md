@@ -23,7 +23,7 @@
 
     `scp -r /path/to/mapping remote_user@ip /path/to/mapping_files`
 
-5. Create a new directory called `business_data` on the remote machine using the comman
+5. Create a new directory called `business_data` on the remote machine using the command
 
     `mkdir business_data`
 
@@ -31,7 +31,7 @@
 
 7. Run the following command for each mapping file
 
-    `python manage.py packages -o export_business_data -d './path/to/business_data' -f 'csv' -c 'path/to/mapping_file' -'resource_model_UUID`
+    `python manage.py packages -o export_business_data -d './path/to/business_data' -f 'csv' -c 'path/to/mapping_file' -g 'resource_model_UUID'
 
 8. Once the business data is exported. Create a new dicrectory called `package` using 
 
