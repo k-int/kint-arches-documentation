@@ -105,7 +105,7 @@ Then `chown USER supervisord.pid`
 14. Run the following to start the supervisord which will start celery workers for your tasks.
 
 ```
-supervisord -c /etc/supervisor/mahs-supervisord.conf
+supervisord -c /etc/supervisor/ARCHES_PROJECT-supervisord.conf
 ```
 
 15. Run the following to stop your supervisord process.
