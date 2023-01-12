@@ -77,7 +77,7 @@ mv my_proj_name-supervisor.conf arches_project-supervisor.conf
 
 8. In each of the files make sure that:       
 `directory=/absolute/path/to/my_proj` is changed to the path of your Arches project e.g. `/home/ubuntu/arches_project`      
-`command=/path/to/virtualenv/` is changed to the path of your virtual environment e.g. `/home/ubuntu/env/`       
+`command=/path/to/virtualenv/` is changed to the path of your virtual environment e.g. `/home/ubuntu/env/` (use `which python3` to find)             
 `user=%(ENV_USER)s` is changed to the user going to run the supervisor e.g. `user=ubuntu`       
 `[app]` is changed to the name of ELASTICSEARCH_PREFIX in your project’s settings.py       
 And in -supervisor.conf, make sure that:       
