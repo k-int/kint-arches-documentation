@@ -1,4 +1,4 @@
-# Create a new project 
+# Installing Arches and creating a new project 
 
 ## Steps
 1. Create a new user to install arches under 
