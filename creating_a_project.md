@@ -18,7 +18,7 @@ sudo apt-get update
 ```
 git clone https://github.com/archesproject/arches.git
 cd arches 
-git checkout 6.1.0
+git checkout {VERSION}
 cd
 ```
 
