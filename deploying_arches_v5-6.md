@@ -213,3 +213,6 @@ sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project
 sudo chmod -R 775 /home/ubuntu/Projects/demo_project/demo_project/static
 sudo chgrp -R www-data /home/ubuntu/Projects/demo_project/demo_project/static
 ```
+
+# Common/known issues
+- In some versions (e.g. v6.1.0) having a project with any capital letters and then running the `python manage.py setup_db` will cause the error "database X does not exist" so for consistency keep project names in lower case.
