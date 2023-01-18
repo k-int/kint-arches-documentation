@@ -40,7 +40,7 @@ source env/bin/activate
 ```
 sudo apt-get install gcc
 pip install wheel
-yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh     [if clean install do not pipe yes]
+sudo bash ~/arches/arches/install/ubuntu_setup.sh     
 yarn install
 ```
 
