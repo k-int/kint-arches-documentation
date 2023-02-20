@@ -1,13 +1,18 @@
 # Installing CouchDB as a docker image
 
 ## Steps
-1. Clone the official couchDB repo
+1. Ensure docker and docker-compose are installed
+```
+sudo apt-get install docker-compose
+sudo apt install docker-ce
+```
+2. Clone the official couchDB repo
 
 ```
 git clone https://github.com/apache/couchdb-docker.git
 ```
 
-2. Create the following docker-compose.yml file in the root of the repo
+3. Create the following docker-compose.yml file in the root of the repo
 
 ```
 version: "3.3"
@@ -33,16 +38,16 @@ volumes:
   couchdb-data:
 ```
 
-3. cd into the correct version you are wanting to install. E.g. `cd 3.2.1` and build the image using
+4. cd into the correct version you are wanting to install. E.g. `cd 3.2.1` and build the image using
 
 ```
 docker build -t couchdb-one .
 ```
 
-4. Once built, cd back into the root of the directory and run:
+5. Once built, cd back into the root of the directory and run:
 
 ```
 docker-compose up -d
 ```
 
-5. To see if it is running use `docker ps`
+6. To see if it is running use `docker ps`
