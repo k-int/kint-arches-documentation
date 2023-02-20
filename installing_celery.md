@@ -102,7 +102,7 @@ Then `chown USER supervisord.pid`
  
 13. Exit as root user and return to the user you wish to run supervisor as.      
 
-14. Run the following to start the supervisord which will start celery workers for your tasks.
+14. Run the following to start the supervisord which will start celery workers for your tasks. 
 
 ```
 supervisord -c /etc/supervisor/ARCHES_PROJECT-supervisord.conf
@@ -113,3 +113,6 @@ supervisord -c /etc/supervisor/ARCHES_PROJECT-supervisord.conf
 ```
 unlink /tmp/supervisor.sock
 ```
+
+16. To see how many celery workers are running, use `ps aux | grep celery` - this should usually be 1 less than the no. CPU cores.
+
