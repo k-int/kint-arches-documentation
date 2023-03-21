@@ -59,7 +59,16 @@ WAR WeWeb Archive (war) for servlet containers.
     ProxyPassReverse /geoserver "http://localhost:8080/geoserver"
 ```
 
-2. In the geoserver web.xml file (if installed normally this will be found in `/var/lib/tomcat9/webapps/geoserver/WEB-INF/web.xml`) add the following lines to the bottom:
+2. Comment out the ProxyPass information regarding GeoServer in the virual host 80
+```
+   # ProxyRequests Off
+   # ProxyPreserveHost On
+
+   # ProxyPass /geoserver "http://localhost:8080/geoserver"
+   # ProxyPassReverse /geoserver "http://localhost:8080/geoserver"
+```
+
+3. In the geoserver web.xml file (if installed normally this will be found in `/var/lib/tomcat9/webapps/geoserver/WEB-INF/web.xml`) add the following lines to the bottom:
 ```
    <context-param>
    <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
