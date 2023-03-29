@@ -83,3 +83,14 @@ In this position we must commit our changes locally and merge.
 
 14. There should be no conflicts if the git histories are intact, however, if there are conflicts use the VSCode Source Control tab to see all conflicts and either accept incoming changes or keep current, or both.
 
+15. Push the new branch to our repo:
+    ```
+    git push origin branch
+    ```
+    
+16. Back on the server fetch the new version from our repo using
+    ```
+    git fetch kint arches_CUSTOMER_NEWVERSION
+    ```
+
+18. Checkout to the version and repeat the steps from the top of the document.
