@@ -3,66 +3,81 @@
 ## Steps
 1. Create a new user to install arches under 
 
-```
-sudo adduser archesadmin
-sudo usermod -aG sudo archesadmin
-```
+   ```
+   sudo adduser archesadmin
+   sudo usermod -aG sudo archesadmin
+   ```
 
 2. Update all packages
 
-```
-sudo apt-get update
-```
+   ```
+   sudo apt-get update
+   ```
 
 3. Clone the arches repo (as this allows for easier development in the future) and checkout the latest stable version
-```
-git clone https://github.com/archesproject/arches.git
-cd arches 
-git checkout {VERSION}
-cd
-```
+   ```
+   git clone https://github.com/archesproject/arches.git
+   cd arches 
+   git checkout {VERSION}
+   cd
+   ```
 
 4.  Create virtual python environment 
-```
-sudo apt-get update
-sudo apt install python3.x-venv     [match version with x]
-sudo apt-get install python3-dev
-python3 -m venv env
-```
+    ```
+    sudo apt-get update
+    sudo apt install python3.x-venv     [match version with x]
+    sudo apt-get install python3-dev
+    python3 -m venv env
+    ```
 
 5. Activate the virtual enviroment
 
-```
-source env/bin/activate
-```
+   ```
+   source env/bin/activate
+   ```
 
 6. Install software dependencies 
-```
-sudo apt-get install gcc
-pip install wheel
-yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh     [if clean install do not pipe yes]
-yarn install
-```
+   ```
+   sudo apt-get install gcc
+   pip install wheel
+   ```
+   Dependencies such as postgres, elasticsearch, yarn, node etc can be installed using
+   `yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh`
+   However, it is typically bad practice to install ES via apt-get.
+   `wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.4.3-linux-x86_64.tar.gz`
+   Unzip the tar file using `tar -xvf <the .tar.gz file>`
+   Run ES in daemon mode using `bin/elasticsearch -d`
+   
+   In core Arches, on the level of package.json run `yarn install`
 
 7. Install Arches
-```
-cd arches
-pip install -e .
-```
+   ```
+   cd arches
+   pip install -e .
+   ```
 
 8. Check postgres and es
-```
-psql -U postgres
-\q 
-curl localhost:9200
-```
+   ```
+   psql -U postgres
+   \q 
+   curl localhost:9200
+   ```
 
 9. Create a project
-```
-cd
-arches-project create project_name
-```
-so that `/home/archesadmin/project_name`
+   ```
+   cd
+   arches-project create project_name
+   ```
+   so that `/home/archesadmin/project_name`
+
+10. Elasticsearch settings
+    In the ES directory we created earlier, in config/elasticsearch.yml ensure that `http.port: 9200` is uncommented/added.
+    Disable xpack security for development - MIGHT NEED TO AMMEND
+    
+    If the arches instance is http then in core arches change the following line to include http not https
+    ```
+    ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
+    ```
 
 ## Load package
 
@@ -70,51 +85,51 @@ Arches packages set up a database.
 If not loading a package, type the following to setup a database. `python manage.py setup_db`
 
 1. Clone package
-```
-git clone 'package_name' 
-```
-HER - Package : https://github.com/archesproject/arches-her
+   ```
+   git clone 'package_name' 
+   ```
+   HER - Package : https://github.com/archesproject/arches-her
 
 2. Load package
-```
-python manage.py packages -o load_package -s 'directory/to/package/' -db
-```
+   ```
+   python manage.py packages -o load_package -s 'directory/to/package/' -db
+   ```
 
 
 ## Run project
 
-```
-cd project_name
-python manage.py runserver
-```
+   ```
+   cd project_name
+   python manage.py runserver
+   ```
 
 # Serving the project with Apache
 
 1. install software
-```
-sudo apt-get install apache2
-sudo apt install apache2-dev python3-dev
-pip install mod_wsgi
-mod_wsgi-express module-config
-```
+   ```
+   sudo apt-get install apache2
+   sudo apt install apache2-dev python3-dev
+   pip install mod_wsgi
+   mod_wsgi-express module-config
+   ```
 2. Copy `mod_wsgi-express module-config` output
 
-example: 
-```
-LoadModule wsgi_module "/home/archesadmin/env/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py38.cpython-38-x86_64-linux-gnu.so"
-WSGIPythonHome "/home/archesadmin/env"
-```
+   example: 
+   ```
+   LoadModule wsgi_module "/home/archesadmin/env/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py38.cpython-38-x86_64-linux-gnu.so"
+   WSGIPythonHome "/home/archesadmin/env"
+   ```
 
 3. Create an apache config file for arches
 
-```
-sudo nano /etc/apache2/sites-available/arches-default.conf 
-```
-Then copy the mod_wsgi-express module-config output and pase it on top o fhte document above `<VirtualHost>`
+   ```
+   sudo nano /etc/apache2/sites-available/arches-default.conf 
+   ```
+   Then copy the mod_wsgi-express module-config output and pase it on top o fhte document above `<VirtualHost>`
 
-Populate the document with the following
+   Populate the document with the following
 
-_Ensure alias is changed to static_
+   _Ensure alias is changed to static_
 
 ```
 # If you have mod_wsgi installed in your python virtual environment, paste the text generated
@@ -169,29 +184,29 @@ _Ensure alias is changed to static_
 ```
 
 4. Enable the new config created in apache
-```
-sudo a2dissite 000-default
-sudo a2ensite arches-default
-sudo service apache2 reload
-```
+   ```
+   sudo a2dissite 000-default
+   sudo a2ensite arches-default
+   sudo service apache2 reload
+   ```
 
 3. Create static files directory 
-```
-mkdir project_name/project_name/static
-```
+   ```
+   mkdir project_name/project_name/static
+   ```
 
 4. Change `settings.py` to following 
-```
-STATIC_ROOT = os.path.join(APP_ROOT, 'static')
-STATIC_URL = '/static/'
-```
-and comment out `#STATIC_ROOT = '/var/www/media'`
+   ```
+   STATIC_ROOT = os.path.join(APP_ROOT, 'static')
+   STATIC_URL = '/static/'
+   ```
+   and comment out `#STATIC_ROOT = '/var/www/media'`
 
 
-finally run
-```
-python manage.py collectstatic
-```
+   finally run
+   ```
+   python manage.py collectstatic
+   ```
 
 5. Grant apache write settings =
 ```
