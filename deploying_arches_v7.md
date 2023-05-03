@@ -42,9 +42,13 @@
    pip install wheel
    ```
    Dependencies such as postgres, elasticsearch, yarn, node etc can be installed using
-   `yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh`
+   ```
+   yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
+   ```
    However, it is typically bad practice to install ES via apt-get.
-   `wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.4.3-linux-x86_64.tar.gz`
+   ```
+   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.4.3-linux-x86_64.tar.gz
+   ```
    Unzip the tar file using `tar -xvf <the .tar.gz file>`
    Run ES in daemon mode using `bin/elasticsearch -d`
    
