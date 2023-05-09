@@ -1,4 +1,10 @@
 # Installing Arches and creating a new project 
+This documentation is specifically for Arches version 7+.
+Between 6 and 7, lots of features have been removed or changed such as:
+- Elasticsearch upgraded from 7 to 8
+- The introduction of webpack to manage front end bundles
+- collectstatic command has been deprecated for build_production
+
 
 ## Steps
 1. Create a new user to install arches under 
@@ -51,6 +57,7 @@
    ```
    Unzip the tar file using `tar -xvf <the .tar.gz file>`
    Run ES in daemon mode using `bin/elasticsearch -d`
+   See ES running by `ps aux | grep elastic` and kill using the pid and `kill -9 pid`
    
    In core Arches, on the level of package.json run `yarn install`
 
@@ -106,6 +113,16 @@ If not loading a package, type the following to setup a database. `python manage
    cd project_name
    python manage.py runserver
    ```
+
+
+## Setting up webpack
+If an error like the following occurs:
+```
+Error reading /mnt/c/testing/v7arches/v7arches/v7arches/webpack/webpack-stats.json. Are you sure webpack has generated the file and the path is correct?
+```
+This is because we need to correct the webpack settings to point at the correct place.
+
+
 
 # Serving the project with Apache
 
