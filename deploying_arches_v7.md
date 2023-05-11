@@ -81,14 +81,25 @@ Between 6 and 7, lots of features have been removed or changed such as:
    ```
    so that `/home/archesadmin/project_name`
 
-10. Elasticsearch settings
-    In the ES directory we created earlier, in config/elasticsearch.yml ensure that `http.port: 9200` is uncommented/added.
-    Disable xpack security for development - MIGHT NEED TO AMMEND
-    
-    If the arches instance is http then in core arches change the following line to include http not https
-    ```
-    ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
-    ```
+
+## Elasticsearch settings
+In the ES directory we created earlier, in config/elasticsearch.yml ensure that `http.port: 9200` is uncommented/added.
+Set `xpack.security.enabled` to `true`
+
+Reset the password for the default "elastic" user:
+```
+bin/elasticsearch-reset-password -u elastic
+```
+
+If the arches instance is http, then copy the following core arches line into the project settings.py and change it to include http not https
+```
+ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
+```
+
+Add the password to the following line in settings.py
+```
+ELASTICSEARCH_CONNECTION_OPTIONS = {"timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "{PASSWORD}")}
+```
 
 ## Load package
 
@@ -121,6 +132,8 @@ If an error like the following occurs:
 Error reading /mnt/c/testing/v7arches/v7arches/v7arches/webpack/webpack-stats.json. Are you sure webpack has generated the file and the path is correct?
 ```
 This is because we need to correct the webpack settings to point at the correct place.
+
+In development, ensure `yarn build development` or `yarn start` is run in a separate terminal at the same time as `python manage.py runserver` is running
 
 
 
