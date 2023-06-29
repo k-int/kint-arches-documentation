@@ -70,8 +70,13 @@ WAR WeWeb Archive (war) for servlet containers.
 
 3. In the geoserver web.xml file (if installed normally this will be found in `/var/lib/tomcat9/webapps/geoserver/WEB-INF/web.xml`) add the following lines to the bottom:
 ```
-   <context-param>
-   <param-name>PROXY_BASE_URL</param-name>
-   <param-value>INSERT DOMAIN NAME HERE</param-value>
-   </context-param>
+    <context-param>
+      <param-name>PROXY_BASE_URL</param-name>
+      <param-value>https://DOMAIN NAME/geoserver</param-value>
+    </context-param>
+
+    <context-param>
+     <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
+     <param-value>DOMAIN NAME</param-value>
+    </context-param>
 ```
