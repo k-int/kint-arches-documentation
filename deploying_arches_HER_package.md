@@ -5,27 +5,25 @@
 
 2. Clone the arches-HER project 
 ```
-https://github.com/archesproject/arches-her.git
+git clone https://github.com/archesproject/arches-her.git
 ```
 
-3. Use git checkout to checkout to the version of Arches e.g. `git checkout dev/6.2x`
-
-4. Copy the package to the same directory
+3. Copy the package to the same directory
 ```
 cp -r arches-her/arches_her/pkg/ .
 ```
 
-5. Setup the database for the project by navigating to the project root directory and running
+4. Setup the database for the project by navigating to the project root directory and running
 ```
 python manage.py setup_db
 ```
 
-6. Load the package
+5. Load the package
 ```
 python manage.py packages -o load_package -s '../pkg/' -db
 ```
 
-7. This package loads the ontologies, graphs, concepts etc but the plugins need to be copied as well as some JS/html components for the workflows.
+6. This package loads the ontologies, graphs, concepts etc but the plugins need to be copied as well as some JS/html components for the workflows.
 
 ## Copying required files
 1. The report templates from the arches-her project are needed in our project. Copy the reports directories found in the following locations
@@ -59,13 +57,19 @@ and place them in our project's /components/ dir.
    
 6. Copy consultations-help from `media/js/views/consultations-help.js`
 
-7. All plugins now need registering via the command line e.g.
+7. All plugins now need registering via the command line:
    ```
-   python manage.py plugin register --source 'project/project/plugins/active-consultations.json'
+   python manage.py plugin register --source 'project/plugins/active-consultations.json'
+   python manage.py plugin register --source 'project/plugins/application-area.json'
+   python manage.py plugin register --source 'project/plugins/communcation-workflow.json'
+   python manage.py plugin register --source 'project/plugins/consultation-workflow.json'
+   python manage.py plugin register --source 'project/plugins/correspondence-workflow.json'
+   python manage.py plugin register --source 'project/plugins/init-workflow.json'
+   python manage.py plugin register --source 'project/plugins/site-visit.json'
    ```
-   These can be seen by running `python manage.py plugin list`
+   These can be confirmed by running `python manage.py plugin list`
    
-8. If the correct version is used all htm files should have `{% load static %}` at the top rather than `{% load staticfiles %}` - if not change to static.
+8. If the correct version is used, all htm files should have `{% load static %}` at the top rather than `{% load staticfiles %}` - if not change to static.
 
 9. Copy all python views from arches-HER from `arches-her/arches_her/views` into the project.
 
@@ -119,5 +123,6 @@ and place them in our project's /components/ dir.
     ```
     From arches-her to your APP_PATHNAME.
     
-13. In `views/index.py` change the import `from arches_her.settings import APP_TITLE` from arches_her to the name of your project.
-14. In `views/resource.py` change the import `from arches_her.views.active_consultations import build_resource_dict` from arches_her to the name of your project.
+13. In `views/index.py` change the import `from arches_her.settings import APP_TITLE` to `from project.settings import APP_TITLE`.
+14. In `views/resource.py` change the import `from arches_her.views.active_consultations import build_resource_dict` to `from .active_consultations import build_resource_dict
+`.
