@@ -42,10 +42,13 @@ WAR WeWeb Archive (war) for servlet containers.
     ProxyPassReverse /geoserver "http://localhost:8080/geoserver"
 ```
 
-2. Enable rewrite
+2. Enable proxy
+`sudo a2enmod proxy`
+
+3. Enable rewrite
 `sudo a2enmod rewrite`
 
-3. Restart
+4. Restart
 `sudo service apache2 restart`
 
 # When using SSL
