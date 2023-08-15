@@ -45,10 +45,13 @@ WAR WeWeb Archive (war) for servlet containers.
 2. Enable proxy
 `sudo a2enmod proxy`
 
-3. Enable rewrite
+3. Enable http proxy
+`sudo a2enmod proxy_http`
+
+4. Enable rewrite
 `sudo a2enmod rewrite`
 
-4. Restart
+5. Restart
 `sudo service apache2 restart`
 
 # When using SSL
