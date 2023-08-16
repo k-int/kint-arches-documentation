@@ -68,6 +68,10 @@ Select isoverlay
 
 Add  `fa fa-globe` for the icon. 
 
-
 # You can now add this maplayer to your arches map !
 check the transparency settings,  opacity may need tweeking.
+
+
+
+## Useful links
+https://groups.google.com/g/archesproject/c/vaBMwbYp6IY/m/nqL6xO-PAwAJ
