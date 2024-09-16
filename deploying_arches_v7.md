@@ -7,7 +7,9 @@ Between 6 and 7, lots of features have been removed or changed such as:
 
 
 ## Steps
-1. Create a new user to install arches under 
+1. Create a new user to install arches under (if applicable)
+
+   If installing arches locally, skip this step. 
 
    ```
    sudo adduser archesadmin
@@ -28,12 +30,13 @@ Between 6 and 7, lots of features have been removed or changed such as:
    cd
    ```
 
-4.  Create virtual python environment 
+4.  Create virtual python environment (note that arches 7.0.0 uses python 3.10, but later versions, such as 7.5 and onwards, are compatible with 3.11)
+
     ```
     sudo apt-get update
     sudo apt install python3.x-venv     [match version with x]
-    sudo apt-get install python3-dev
-    python3 -m venv env
+    sudo apt-get install python3.x-dev
+    python3.x -m venv env
     ```
 
 5. Activate the virtual enviroment
