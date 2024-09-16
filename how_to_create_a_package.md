@@ -7,7 +7,7 @@
 
 2. Create a mapping file using the Arches UI
 
-    2.1. Go to Arches Designer in the UI and navigate to the relevant resource model
+    2.1. Go to Arches Designer in the UI and navigate to the relevant resource model(s)
 
     2.2. Click `Manage...` and select `Export Mapping File` 
 
@@ -81,7 +81,7 @@
 
 ### Once business data is moved, it's time to download reference data
 
-11. Go to Reference Data Manager in Arches UI click  `Tools` and export each thesauri one by one. You may need to right click and save these from the browswer if they open in a new tab. 
+11. Go to Reference Data Manager in Arches UI click  `Tools` and export each thesauri one by one. You may need to right click and save these from the browser if they open in a new tab. 
 
     11.2. Once downloaded, move the thesauri to the remote machine's `packages/package_name/reference_data/concepts` using the command
 
