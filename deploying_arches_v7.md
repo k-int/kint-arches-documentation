@@ -7,7 +7,7 @@ Between 6 and 7, lots of features have been removed or changed such as:
 
 
 ## Steps
-1. Create a new user to install arches under (if applicable)
+### 1. Create a new user to install arches under (if applicable)
 
    If installing arches locally, skip this step. 
 
@@ -16,95 +16,115 @@ Between 6 and 7, lots of features have been removed or changed such as:
    sudo usermod -aG sudo archesadmin
    ```
 
-2. Update all packages
+### 2. Update all packages
 
    ```
    sudo apt-get update
    ```
 
-3. Clone the arches repo (as this allows for easier development in the future) and checkout the latest stable version
+### 3. Create a master directory to house everything. Within it, clone the arches repo (as this allows for easier development in the future).
    ```
-   git clone https://github.com/archesproject/arches.git
+   git clone https://github.com/archesproject/arches.git 
+   ```
+
+### 4. Checkout to the latest stable version
+   ```
    cd arches 
    git checkout {VERSION}
-   cd
    ```
 
-4.  Create virtual python environment (note that arches 7.0.0 uses python 3.10, but later versions, such as 7.5 and onwards, are compatible with 3.11)
+### 5.  Create virtual python environment 
 
-    ```
-    sudo apt-get update
-    sudo apt install python3.x-venv     [match version with x]
-    sudo apt-get install python3.x-dev
-    python3.x -m venv env
-    ```
+   Note that arches 7.0.0 uses python 3.10, but later versions, such as 7.5 and onwards, are compatible with 3.11.
 
-5. Activate the virtual enviroment
+   If you haven't previously installed the relevant venv for the version of python needed, run the following, replacing 3.x with the correct python version:
 
    ```
-   source env/bin/activate
+   sudo apt-get update
+   sudo apt install python3.x-venv
+   sudo apt-get install python3.x-dev
+   ```
+   To create the virtual environment for your project, within the master directory, run:
+
+   ```
+   python3.x -m venv env3.x
    ```
 
-6. Install software dependencies 
+### 6. Activate the virtual enviroment
+
+   ```
+   source env3.x/bin/activate
+   ```
+
+### 7. Install software dependencies 
    ```
    sudo apt-get install gcc
    pip install wheel
    ```
-   Dependencies such as postgres, elasticsearch, yarn, node etc can be installed using
+   In core Arches, on the level of package.json run `yarn install`
+
+   Dependencies such as postgres, elasticsearch, yarn, node etc can be installed using the following script, responding yes when prompted (except for Elastic Search):
    ```
-   yes | sudo bash ~/arches/arches/install/ubuntu_setup.sh
+   sudo bash ~/arches/arches/install/ubuntu_setup.sh
    ```
-   However, it is typically bad practice to install ES via apt-get.
+   It is typically bad practice to install ES via apt-get.  Instead use the following to download the relevant installation file:
    ```
    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.4.3-linux-x86_64.tar.gz
    ```
    Unzip the tar file using `tar -xvf <the .tar.gz file>`
-   Run ES in daemon mode using `bin/elasticsearch -d`
-   See ES running by `ps aux | grep elastic` and kill using the pid and `kill -9 pid`
-   
-   In core Arches, on the level of package.json run `yarn install`
 
-7. Install Arches
+   In the unzipped ES directory, in config/elasticsearch.yml ensure that `http.port: 9200` is uncommented/added.
+   
+   If not already the case, set `xpack.security.enabled` to `true`
+
+   Reset the password for the default "elastic" user:
    ```
-   cd arches
+   bin/elasticsearch-reset-password -u elastic
+   ```
+
+   Inside the unzipped ES directory, run ES in daemon mode using `bin/elasticsearch -d`
+   See ES running by `ps aux | grep elastic` and kill using the pid and `kill -9 pid`
+
+### 8. Install Arches
+
+   Whilst connected to the python virtual environment, run:
+   ```
    pip install -e .
    ```
 
-8. Check postgres and es
+### 9. Check postgres and es
    ```
    psql -U postgres
    \q 
    curl localhost:9200
    ```
 
-9. Create a project
+### 10. Create a project
+
+   Within the master directory run (replacing {project_name with the new project's desired name}):
    ```
-   cd
-   arches-project create project_name
+   arches-project create {project_name}
    ```
-   so that `/home/archesadmin/project_name`
 
+### 11. Elasticsearch settings
 
-## Elasticsearch settings
-In the ES directory we created earlier, in config/elasticsearch.yml ensure that `http.port: 9200` is uncommented/added.
-Set `xpack.security.enabled` to `true`
+   If the arches instance is http, then copy the following core arches line into the project settings.py and change to include http not https:
+   ```
+   ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
+   ```
 
-Reset the password for the default "elastic" user:
-```
-bin/elasticsearch-reset-password -u elastic
-```
+   If it's not already defined, you may also need to add the following line: 
 
-If the arches instance is http, then copy the following core arches line into the project settings.py and change it to include http not https
-```
-ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
-```
+   ```
+   ELASTICSEARCH_HTTP_PORT = 9200  # this should be in increments of 200, eg: 9400, 9600, 9800
+   ```
 
-Add the password to the following line in settings.py
-```
-ELASTICSEARCH_CONNECTION_OPTIONS = {"timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "{PASSWORD}")}
-```
+   Add the ES password, set earlier, to the following line in settings.py, replacing {PASSWORD}
+   ```
+   ELASTICSEARCH_CONNECTION_OPTIONS = {"timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "{PASSWORD}")}
+   ```
 
-## Load package
+### 12. Load package or set up database
 
 Arches packages set up a database.
 If not loading a package, type the following to setup a database. `python manage.py setup_db`
@@ -121,24 +141,30 @@ If not loading a package, type the following to setup a database. `python manage
    ```
 
 
-## Run project
+### 13. Run project
 
    ```
    cd project_name
    python manage.py runserver
    ```
 
+   Note that the software will not work without errors until webpack has been set up, as per the next step. You may also need to fix some issues with missing packages outlined below. 
 
-## Setting up webpack
-If an error like the following occurs:
-```
-Error reading /mnt/c/testing/v7arches/v7arches/v7arches/webpack/webpack-stats.json. Are you sure webpack has generated the file and the path is correct?
-```
-This is because we need to correct the webpack settings to point at the correct place.
+### 14. Setting up webpack
+   If an error like the following occurs:
+   ```
+   Error reading /mnt/c/testing/v7arches/v7arches/v7arches/webpack/webpack-stats.json. Are you sure webpack has generated the file and the path is correct?
+   ```
+   This is because we need to correct the webpack settings to point at the correct place.
 
-In development, ensure `yarn build development` or `yarn start` is run in a separate terminal at the same time as `python manage.py runserver` is running
+   At the same time as `python manage.py runserver` is running, run `yarn build development` or `yarn start` in a separate terminal, in the location of the project's package.json file.
+   
+   Some packages may need to be added to the package.json manually. Examples include: 
 
-
+   ```
+   "datatables.net": "1.12.1",
+   "jquery-validation": "1.20.0"
+   ```
 
 # Serving the project with Apache
 
@@ -162,7 +188,7 @@ In development, ensure `yarn build development` or `yarn start` is run in a sepa
    ```
    sudo nano /etc/apache2/sites-available/arches-default.conf 
    ```
-   Then copy the mod_wsgi-express module-config output and pase it on top o fhte document above `<VirtualHost>`
+   Then copy the mod_wsgi-express module-config output and paste it on top of the document above `<VirtualHost>`
 
    Populate the document with the following
 
