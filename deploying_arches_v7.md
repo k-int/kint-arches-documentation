@@ -148,18 +148,9 @@ If not loading a package, type the following to setup a database. `python manage
    python manage.py runserver
    ```
 
-   Note that the software will not work without errors until webpack has been set up, as per the next step.
+   Note that the software will not work without errors until webpack has been set up, as per the next step. You may also need to fix some issues with missing packages outlined below. 
 
-### 14. Fixing missing packages
-
-Some packages may need to be added to the package.json manually. Examples include: 
-
-   ```
-   "datatables.net": "1.12.1",
-   "jquery-validation": "1.20.0"
-   ```
-
-### 15. Setting up webpack
+### 14. Setting up webpack
    If an error like the following occurs:
    ```
    Error reading /mnt/c/testing/v7arches/v7arches/v7arches/webpack/webpack-stats.json. Are you sure webpack has generated the file and the path is correct?
@@ -167,7 +158,13 @@ Some packages may need to be added to the package.json manually. Examples includ
    This is because we need to correct the webpack settings to point at the correct place.
 
    At the same time as `python manage.py runserver` is running, run `yarn build development` or `yarn start` in a separate terminal, in the location of the project's package.json file.
+   
+   Some packages may need to be added to the package.json manually. Examples include: 
 
+   ```
+   "datatables.net": "1.12.1",
+   "jquery-validation": "1.20.0"
+   ```
 
 # Serving the project with Apache
 
